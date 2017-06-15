@@ -52,8 +52,6 @@ class Voyager
         'User'       => User::class,
     ];
 
-    public $setting_cache = null;
-
     public function __construct()
     {
         $this->filesystem = app(Filesystem::class);
@@ -138,11 +136,13 @@ class Voyager
 
     public function setting($key, $default = null)
     {
-        if ($this->setting_cache === null) {
-            $this->setting_cache = Setting::pluck('value', 'key');
+        $setting = Setting::where('key', '=', $key)->first();
+
+        if (isset($setting->id)) {
+            return $setting->value;
         }
 
-        return $this->setting_cache->get($key) ?: $default;
+        return $default;
     }
 
     public function image($file, $default = '')
