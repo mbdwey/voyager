@@ -17,7 +17,7 @@
                         <a href="{{ route('voyager.dashboard')}}"><i class="voyager-boat"></i> {{ trans('voyager.generic_dashboard') }}</a>
                     </li>
                 @endif
-                <?php $breadcrumb_url = ''; ?>
+                <?php $breadcrumb_url = url(''); ?>
                 @for($i = 1; $i <= count(Request::segments()); $i++)
                     <?php $breadcrumb_url .= '/' . Request::segment($i); ?>
                     @if(Request::segment($i) != ltrim(route('voyager.dashboard', [], false), '/') && !is_numeric(Request::segment($i)))
@@ -34,7 +34,7 @@
                 @endfor
             </ol>
         </div>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav @if (Voyager::isRtl()) navbar-left @else navbar-right @endif">
             <li class="dropdown profile">
                 <a href="#" class="dropdown-toggle text-right" data-toggle="dropdown" role="button"
                    aria-expanded="false"><img src="{{ $user_avatar }}" class="profile-img"> <span

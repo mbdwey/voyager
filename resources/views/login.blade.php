@@ -10,9 +10,13 @@
     <link rel="stylesheet" href="{{ voyager_asset('lib/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ voyager_asset('css/animate.min.css') }}">
     <link rel="stylesheet" href="{{ voyager_asset('css/login.css') }}">
+    @if (Voyager::isRtl())
+        <link rel="stylesheet" href="{{ voyager_asset('css/login-rtl.css') }}">
+    @endif
     <style>
         body {
             background-image:url('{{ Voyager::image( Voyager::setting("admin_bg_image"), config('voyager.assets_path') . "/images/bg.jpg" ) }}');
+            background-color: {{ Voyager::setting("admin_bg_color", "#FFFFFF" ) }};
         }
         .login-sidebar:after {
             background: linear-gradient(-135deg, {{config('voyager.login.gradient_a','#ffffff')}}, {{config('voyager.login.gradient_b','#ffffff')}});
@@ -28,7 +32,7 @@
 </head>
 <body>
 <!-- Designed with ♥ by Frondor -->
-<div class="container-fluid">
+<div class="container-fluid" @if (Voyager::isRtl()) dir="rtl" @endif>
     <div class="row">
         <div class="faded-bg animated"></div>
         <div class="hidden-xs col-sm-8 col-md-9">
